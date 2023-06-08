@@ -7,6 +7,7 @@ https://determined-jade-cobra.cyclic.app/
 var express = require("express");
 var app = express();
 var path = require("path");
+const storeService = require('./store-service');
 
 var HTTP_PORT = process.env.PORT || 8080;
 
