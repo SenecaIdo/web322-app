@@ -8,6 +8,8 @@ var express = require("express");
 var app = express();
 var path = require("path");
 const storeService = require('./store-service');
+const items = require('./data/items');
+const categories = require('./data/categories');
 
 var HTTP_PORT = process.env.PORT || 8080;
 
@@ -27,6 +29,23 @@ app.get("/", function(req, res) {
 // Serve the about.html file from the 'week2-assets' directory
 app.get("/about", function(req, res) {
   res.sendFile(path.join(__dirname, "/views/about.html"));
+});
+
+app.get("/shop", function(req, res) {
+  const publishedItems = items.filter(item => item.published === true);
+  res.json(publishedItems);
+});
+
+  app.get("/items", function(req, res) {
+  res.json(items);
+});
+
+app.get("/categories", function(req, res) {
+  res.json(categories);
+});
+
+app.use(function(req, res){
+  res.status(404).send("page not found");
 });
 
 // setup http server to listen on HTTP_PORT
