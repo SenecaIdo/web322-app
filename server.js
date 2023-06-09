@@ -13,7 +13,20 @@ const categories = require('./data/categories');
 
 var HTTP_PORT = process.env.PORT || 8080;
 
-// call this function after the http server starts listening for requests
+
+
+
+// Call initialize function to populate data
+storeService.initialize()
+  .then(() => {
+    // Server initialization
+    app.listen(HTTP_PORT, onHttpStart);
+  })
+  .catch(error => {
+    console.error("Error initializing the server:", error);
+  });
+  
+// Call this function after the HTTP server starts listening for requests
 function onHttpStart() {
   console.log("Express http server listening on: " + HTTP_PORT);
 }
@@ -32,18 +45,35 @@ app.get("/about", function(req, res) {
 });
 
 app.get("/shop", function(req, res) {
-  const publishedItems = items.filter(item => item.published === true);
-  res.json(publishedItems);
+  storeService.getPublishedItems()
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.status(500).json({ message: err });
+    });
 });
 
-  app.get("/items", function(req, res) {
-  res.json(items);
+app.get("/items", function(req, res) {
+  storeService.getAllItems()
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.status(500).json({ message: err });
+    });
 });
 
 app.get("/categories", function(req, res) {
-  res.json(categories);
+  storeService.getCategories()
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.status(500).json({ message: err });
+    });
 });
 
 app.use(function(req, res){
-  res.status(404).send("page not found");
+  res.status(404).send("404 page not found");
 });
