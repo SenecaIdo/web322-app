@@ -1,8 +1,12 @@
-/*
-WEB322 - Assignment 2
-Ido Papo
-https://determined-jade-cobra.cyclic.app/
-*/
+/*********************************************************************************
+WEB322 – Assignment 02
+I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part * of this assignment hasbeen copied manually or electronically from any other source (including 3rd party web sites) or distributed to other students.
+Name: Ido Papo
+Student ID: 111720223
+Date: 9.6.23
+Cyclic Web App URL: https://sore-ruby-salmon-wear.cyclic.app/about
+GitHub Repository URL: https://github.com/SenecaIdo/web322-app.git
+********************************************************************************/
 
 var express = require("express");
 var app = express();
