@@ -47,6 +47,3 @@ app.get("/categories", function(req, res) {
 app.use(function(req, res){
   res.status(404).send("page not found");
 });
-
-// setup http server to listen on HTTP_PORT
-app.listen(HTTP_PORT, onHttpStart);
